@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="BrainUnfuckCompiler" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/BrainUnfuckCompiler" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Option parameters='&quot;TestProgram.bu&quot; &quot;TestProgram.bf&quot;' />
+				<Compiler>
+					<Add option="-g" />
+					<Add directory="include" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/BrainUnfuckCompiler" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add directory="include" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+		</Compiler>
+		<Unit filename="include/Argument.h" />
+		<Unit filename="include/AssemblingStage.h" />
+		<Unit filename="include/Command.h" />
+		<Unit filename="include/Compiler.h" />
+		<Unit filename="include/CompilerContext.h" />
+		<Unit filename="include/Data.h" />
+		<Unit filename="include/Procedure.h" />
+		<Unit filename="include/RegisteringStage.h" />
+		<Unit filename="include/Stage.h" />
+		<Unit filename="include/SubstitutingStage.h" />
+		<Unit filename="include/TokenizingStage.h" />
+		<Unit filename="src/Argument.cpp" />
+		<Unit filename="src/AssemblingStage.cpp" />
+		<Unit filename="src/Command.cpp" />
+		<Unit filename="src/Compiler.cpp" />
+		<Unit filename="src/CompilerContext.cpp" />
+		<Unit filename="src/Data.cpp" />
+		<Unit filename="src/Procedure.cpp" />
+		<Unit filename="src/RegisteringStage.cpp" />
+		<Unit filename="src/Stage.cpp" />
+		<Unit filename="src/SubstitutingStage.cpp" />
+		<Unit filename="src/TokenizingStage.cpp" />
+		<Unit filename="src/main.cpp" />
+		<Extensions>
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

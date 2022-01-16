@@ -1,0 +1,110 @@
+# depslib dependency file v1.0
+1642211191 source:c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\src\main.cpp
+	"Compiler.h"
+	<iostream>
+	<fstream>
+	<string>
+	<sstream>
+
+1642189528 source:c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\src\argument.cpp
+	"Argument.h"
+
+1642265817 c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\include\argument.h
+	<string>
+
+1642209208 source:c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\src\assemblingstage.cpp
+	"AssemblingStage.h"
+
+1642209000 c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\include\assemblingstage.h
+	"Stage.h"
+
+1642272812 source:c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\src\command.cpp
+	"Command.h"
+
+1642272790 c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\include\command.h
+	"Argument.h"
+	<vector>
+	<string>
+
+1642096175 source:c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\src\data.cpp
+	"Data.h"
+
+1642269215 c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\include\data.h
+	<string>
+
+1642096145 source:c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\src\procedure.cpp
+	"Procedure.h"
+
+1642270633 c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\include\procedure.h
+	"Command.h"
+	<string>
+	<vector>
+
+1642271920 source:c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\src\substitutionstage.cpp
+	"SubstitutionStage.h"
+
+1642271920 c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\include\substitutionstage.h
+	"Stage.h"
+
+1642287102 source:c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\src\tokenizingstage.cpp
+	"TokenizingStage.h"
+
+1642210264 c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\include\tokenizingstage.h
+	"Command.h"
+	"Argument.h"
+	"Stage.h"
+	<string>
+	<sstream>
+	<vector>
+	<utility>
+	<algorithm>
+	<iostream>
+
+1642272004 source:c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\src\compiler.cpp
+	"Compiler.h"
+
+1642287576 c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\include\compiler.h
+	"TokenizingStage.h"
+	"RegisteringStage.h"
+	"SubstitutingStage.h"
+	"AssemblingStage.h"
+	"Stage.h"
+	<string>
+	<iostream>
+
+1642287203 source:c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\src\compilercontext.cpp
+	"CompilerContext.h"
+
+1642287175 c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\include\compilercontext.h
+	"Command.h"
+	"Data.h"
+	"Procedure.h"
+	<vector>
+	<string>
+	<unordered_map>
+
+1642209314 c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\include\stage.h
+	"CompilerContext.h"
+
+1642208939 source:c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\src\stage.cpp
+	"Stage.h"
+
+1642271919 c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\include\registrystage.h
+	"Stage.h"
+	<sstream>
+	<algorithm>
+
+1642286703 source:c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\src\registrystage.cpp
+	"RegistryStage.h"
+
+1642287240 c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\include\registeringstage.h
+	"Stage.h"
+	<sstream>
+	<algorithm>
+
+1642287576 c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\include\substitutingstage.h
+	"Stage.h"
+
+1642287240 source:c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\src\registeringstage.cpp
+	"RegisteringStage.h"
+
