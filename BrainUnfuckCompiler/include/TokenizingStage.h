@@ -1,8 +1,7 @@
 #ifndef TOKENIZINGSTAGE_H
 #define TOKENIZINGSTAGE_H
 
-#include "Command.h"
-#include "Argument.h"
+#include "Structure.h"
 #include "Stage.h"
 
 #include <string>

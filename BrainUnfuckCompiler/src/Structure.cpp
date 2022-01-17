@@ -1,12 +1,4 @@
-#include "Command.h"
-
-Command::Command()
-{
-}
-
-Command::~Command()
-{
-}
+#include "Structure.h"
 
 Command::Name Command::commandNameFromStr(std::string str)
 {

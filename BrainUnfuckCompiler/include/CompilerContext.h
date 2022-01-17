@@ -1,9 +1,7 @@
 #ifndef COMPILERCONTEXT_H
 #define COMPILERCONTEXT_H
 
-#include "Command.h"
-#include "Data.h"
-#include "Procedure.h"
+#include "Structure.h"
 
 #include <vector>
 #include <string>
