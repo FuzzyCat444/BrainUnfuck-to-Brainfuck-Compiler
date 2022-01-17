@@ -34,6 +34,16 @@ std::vector<std::pair<int, Command>> CompilerContext::getRegisteringStageResults
     return registeringStageResults;
 }
 
+void CompilerContext::setSubstitutingStageResults(std::vector<std::pair<int, Command>> results)
+{
+    substitutingStageResults = results;
+}
+
+std::vector<std::pair<int, Command>> CompilerContext::getSubstitutingStageResults() const
+{
+    return substitutingStageResults;
+}
+
 void CompilerContext::log(std::string msg)
 {
     msgs.push_back(msg);
@@ -51,16 +61,42 @@ bool CompilerContext::registerData(std::string dataName, int dataSize)
     return true;
 }
 
-bool CompilerContext::registerProcedure(std::string procName, std::vector<std::string> paramNames, std::vector<std::pair<int, Command>> commands)
+int CompilerContext::registerProcedure(std::string procName, std::vector<std::string> paramNames, std::vector<std::pair<int, Command>> commands)
 {
     if (procReg.find(procName) != procReg.end())
-        return false;
+        return -1;
     Procedure proc;
     proc.name = procName;
-    proc.parameters = paramNames;
+    for (int i = 0; i < paramNames.size(); i++)
+    {
+        if (proc.parameters.find(paramNames.at(i)) == proc.parameters.end())
+            proc.parameters.insert(std::make_pair(paramNames.at(i), i));
+        else
+            return -2;
+    }
     proc.commands = commands;
     procReg.insert(std::make_pair(procName, proc));
-    return true;
+    return 0;
+}
+
+Data CompilerContext::getData(std::string dataName) const
+{
+    if (dataReg.find(dataName) != dataReg.end())
+        return dataReg.at(dataName);
+
+    Data data;
+    data.name = "";
+    return data;
+}
+
+Procedure CompilerContext::getProcedure(std::string procName) const
+{
+    if (procReg.find(procName) != procReg.end())
+        return procReg.at(procName);
+
+    Procedure proc;
+    proc.name = "";
+    return proc;
 }
 
 std::vector<std::string>::const_iterator CompilerContext::messagesBegin() const

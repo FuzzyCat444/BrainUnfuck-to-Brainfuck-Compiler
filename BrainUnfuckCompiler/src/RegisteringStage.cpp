@@ -85,6 +85,8 @@ void RegisteringStage::process(CompilerContext& context) const
 
         auto procEndIt = std::find_if(procStartIt + 1, commands.end(),
              [](const std::pair<int, Command>& p) { return p.second.name == Command::Name::ENDPROC; });
+
+        bool procRegistered = false;
         if (procEndIt == commands.end())
         {
             std::ostringstream oss;
@@ -118,11 +120,23 @@ void RegisteringStage::process(CompilerContext& context) const
                         for (auto it = command.arguments.begin() + 1; it != command.arguments.end(); it++)
                             paramNames.push_back(it->str);
                         std::vector<std::pair<int, Command>> procCommands(procStartIt + 1, procEndIt);
-                        if (!context.registerProcedure(procName, paramNames, procCommands))
+                        int result = context.registerProcedure(procName, paramNames, procCommands);
+                        if (result == -1)
                         {
                             std::ostringstream oss;
                             oss << "Line " << lineNum << ": Procedure '" << procName << "' redefinition.";
                             context.log(oss.str());
+                        }
+                        else if (result == -2)
+                        {
+                            std::ostringstream oss;
+                            oss << "Line " << lineNum << ": Duplicate procedure arguments for '" << procName << "'.";
+                            context.log(oss.str());
+                        }
+                        else
+                        {
+                            procStartIt = commands.erase(procStartIt, procEndIt + 1);
+                            procRegistered = true;
                         }
                     }
                     else
@@ -140,7 +154,8 @@ void RegisteringStage::process(CompilerContext& context) const
                 }
             }
         }
-        procStartIt++;
+        if (!procRegistered)
+            procStartIt++;
     }
 
     context.setRegisteringStageResults(commands);

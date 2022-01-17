@@ -3,6 +3,10 @@
 
 #include "Stage.h"
 
+#include <sstream>
+#include <algorithm>
+#include <iostream>
+
 class SubstitutingStage : public Stage
 {
 public:

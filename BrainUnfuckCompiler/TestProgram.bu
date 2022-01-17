@@ -1,3 +1,20 @@
-PROC hi a b c
-
+PROC A
+	DO B
+	DO B
 ENDPROC
+
+PROC B
+	DO C
+	DO C
+ENDPROC
+
+PROC C
+	DO D
+	DO D
+ENDPROC
+
+PROC D
+	OUT "hi"
+ENDPROC
+
+DO A

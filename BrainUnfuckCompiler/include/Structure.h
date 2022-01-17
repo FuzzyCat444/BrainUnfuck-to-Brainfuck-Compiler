@@ -5,6 +5,7 @@
 #include <vector>
 #include <utility>
 #include <unordered_map>
+#include <iostream>
 
 struct Argument
 {
@@ -31,10 +32,13 @@ struct Command
     };
 
     static Name commandNameFromStr(std::string str);
+    static std::string commandStrFromName(Name name);
 
     Name name;
     std::vector<Argument> arguments;
 };
+
+void printCommands(const std::vector<std::pair<int, Command>>& commands);
 
 struct Data
 {
@@ -45,7 +49,7 @@ struct Data
 struct Procedure
 {
     std::string name;
-    std::vector<std::string> parameters;
+    std::unordered_map<std::string, int> parameters;
     std::vector<std::pair<int, Command>> commands;
 };
 

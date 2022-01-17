@@ -21,7 +21,7 @@ Command::Name Command::commandNameFromStr(std::string str)
     else if (str == "OUT")
         return Command::Name::OUT;
     else if (str == "ADDRESS")
-        return Command::Name::STORE;
+        return Command::Name::ADDRESS;
     else if (str == "COPYVV")
         return Command::Name::COPYVV;
     else if (str == "COPYMV")
@@ -56,4 +56,86 @@ Command::Name Command::commandNameFromStr(std::string str)
         return Command::Name::AND;
 
     return Command::Name::INVALID;
+}
+
+std::string Command::commandStrFromName(Name name)
+{
+    if (name == Name::DATA)
+        return "DATA";
+    else if (name == Name::PROC)
+        return "PROC";
+    else if (name == Name::ENDPROC)
+        return "ENDPROC";
+    else if (name == Name::DO)
+        return "DO";
+    else if (name == Name::WHILE)
+        return "WHILE";
+    else if (name == Name::ENDWHILE)
+        return "ENDWHILE";
+    else if (name == Name::STORE)
+        return "STORE";
+    else if (name == Name::IN)
+        return "IN";
+    else if (name == Name::OUT)
+        return "OUT";
+    else if (name == Name::ADDRESS)
+        return "ADDRESS";
+    else if (name == Name::COPYVV)
+        return "COPYVV";
+    else if (name == Name::COPYMV)
+        return "COPYMV";
+    else if (name == Name::COPYVM)
+        return "COPYVM";
+    else if (name == Name::COPYMM)
+        return "COPYMM";
+    else if (name == Name::ADD)
+        return "ADD";
+    else if (name == Name::SUB)
+        return "SUB";
+    else if (name == Name::MUL)
+        return "MUL";
+    else if (name == Name::DIV)
+        return "DIV";
+    else if (name == Name::LT)
+        return "LT";
+    else if (name == Name::GT)
+        return "GT";
+    else if (name == Name::EQ)
+        return "EQ";
+    else if (name == Name::LTE)
+        return "LTE";
+    else if (name == Name::GTE)
+        return "GTE";
+    else if (name == Name::NOT)
+        return "NOT";
+    else if (name == Name::OR)
+        return "OR";
+    else if (name == Name::AND)
+        return "AND";
+
+    return "INVALID";
+}
+
+void printCommands(const std::vector<std::pair<int, Command>>& commands)
+{
+    for (auto it = commands.begin(); it != commands.end(); it++)
+    {
+        const Command& command = it->second;
+        std::cout << Command::commandStrFromName(command.name) << " ";
+        for (auto argIt = command.arguments.begin(); argIt != command.arguments.end(); argIt++)
+        {
+            if (argIt->type == Argument::Type::INVALID)
+                std::cout << "INVALID";
+            else if (argIt->type == Argument::Type::NUMERIC_LITERAL)
+                std::cout << argIt->num;
+            else if (argIt->type == Argument::Type::STRING_LITERAL)
+                std::cout << '"' << argIt->str << '"';
+            else if (argIt->type == Argument::Type::VARIABLE)
+                std::cout << argIt->str;
+            else if (argIt->type == Argument::Type::VARIABLE_ARRAY)
+                std::cout << argIt->str << "[" << argIt->num << "]";
+            std::cout << " ";
+        }
+        std::cout << std::endl;
+    }
 }

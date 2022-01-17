@@ -21,10 +21,16 @@ public:
     void setRegisteringStageResults(std::vector<std::pair<int, Command>> results);
     std::vector<std::pair<int, Command>> getRegisteringStageResults() const;
 
+    void setSubstitutingStageResults(std::vector<std::pair<int, Command>> results);
+    std::vector<std::pair<int, Command>> getSubstitutingStageResults() const;
+
     void log(std::string msg);
 
     bool registerData(std::string dataName, int dataSize);
-    bool registerProcedure(std::string procName, std::vector<std::string> paramNames, std::vector<std::pair<int, Command>> commands);
+    int registerProcedure(std::string procName, std::vector<std::string> paramNames, std::vector<std::pair<int, Command>> commands);
+
+    Data getData(std::string dataName) const;
+    Procedure getProcedure(std::string procName) const;
 
     std::vector<std::string>::const_iterator messagesBegin() const;
     std::vector<std::string>::const_iterator messagesEnd() const;
@@ -35,6 +41,7 @@ private:
 
     std::vector<std::pair<int, Command>> tokenizingStageResults;
     std::vector<std::pair<int, Command>> registeringStageResults;
+    std::vector<std::pair<int, Command>> substitutingStageResults;
 
     int dataPos;
     std::unordered_map<std::string, Data> dataReg;
