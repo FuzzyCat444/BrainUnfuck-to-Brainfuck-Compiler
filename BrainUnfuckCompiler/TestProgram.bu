@@ -1,0 +1,3 @@
+DATA a[7]
+DATA b
+OUT 1 b

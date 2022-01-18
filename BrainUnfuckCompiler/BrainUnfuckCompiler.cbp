@@ -42,6 +42,7 @@
 		<Unit filename="include/Structure.h" />
 		<Unit filename="include/SubstitutingStage.h" />
 		<Unit filename="include/TokenizingStage.h" />
+		<Unit filename="include/Util.h" />
 		<Unit filename="src/AssemblingStage.cpp" />
 		<Unit filename="src/Compiler.cpp" />
 		<Unit filename="src/CompilerContext.cpp" />
@@ -50,6 +51,7 @@
 		<Unit filename="src/Structure.cpp" />
 		<Unit filename="src/SubstitutingStage.cpp" />
 		<Unit filename="src/TokenizingStage.cpp" />
+		<Unit filename="src/Util.cpp" />
 		<Unit filename="src/main.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />

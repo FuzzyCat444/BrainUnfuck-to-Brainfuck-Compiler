@@ -84,7 +84,5 @@ void SubstitutingStage::process(CompilerContext& context) const
         iterations++;
     }
 
-    printCommands(commands);
-
     context.setSubstitutingStageResults(commands);
 }

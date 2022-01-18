@@ -79,14 +79,11 @@ int CompilerContext::registerProcedure(std::string procName, std::vector<std::st
     return 0;
 }
 
-Data CompilerContext::getData(std::string dataName) const
+int CompilerContext::getDataPos(std::string dataName, int offset) const
 {
-    if (dataReg.find(dataName) != dataReg.end())
-        return dataReg.at(dataName);
-
-    Data data;
-    data.name = "";
-    return data;
+    if (dataReg.find(dataName) != dataReg.end() && offset >= 0)
+        return dataReg.at(dataName).position + offset;
+    return -1;
 }
 
 Procedure CompilerContext::getProcedure(std::string procName) const
@@ -109,6 +106,10 @@ std::vector<std::string>::const_iterator CompilerContext::messagesEnd() const
     return msgs.end();
 }
 
+void CompilerContext::setCompiledBrainfuck(std::string compiled)
+{
+    compiledBrainfuck = compiled;
+}
 
 std::string CompilerContext::getCompiledBrainfuck() const
 {

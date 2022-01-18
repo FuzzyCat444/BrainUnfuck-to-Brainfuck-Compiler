@@ -2,6 +2,9 @@
 #define ASSEMBLINGSTAGE_H
 
 #include "Stage.h"
+#include "Util.h"
+
+#include <sstream>
 
 class AssemblingStage : public Stage
 {

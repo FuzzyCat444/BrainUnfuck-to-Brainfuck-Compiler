@@ -1,0 +1,31 @@
+IN {a} {b}
+
+{a} must be a numeric literal greater than 0
+{b} must be a variable or array variable
+
+Inputs {a} characters into adjacent memory slots starting at position {b}
+
+Algorithm (start at 0):
+(> 19 times): go to 0th byte
+((> 20 times) b times): go to starting position {b}
+(, (> 20 times) a times): input all chars
+((< 20 times) a times): go back to position {b}
+((< 20 times) b times): go back to value 0
+(< 19 times): go back to 0th byte
+
+=============================================================================
+
+OUT {a} {b}
+
+Same as IN but with period instead of comma
+
+=============================================================================
+
+STORE {a} {b}
+
+{a} must be either a numeric (byte sized) or string literal
+{b} must be a variable or array variable
+
+Stores number/string {a} at position {b}
+
+Algorithm (start at 0):

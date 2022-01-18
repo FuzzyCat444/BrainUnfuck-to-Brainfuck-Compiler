@@ -29,12 +29,13 @@ public:
     bool registerData(std::string dataName, int dataSize);
     int registerProcedure(std::string procName, std::vector<std::string> paramNames, std::vector<std::pair<int, Command>> commands);
 
-    Data getData(std::string dataName) const;
+    int getDataPos(std::string dataName, int offset) const;
     Procedure getProcedure(std::string procName) const;
 
     std::vector<std::string>::const_iterator messagesBegin() const;
     std::vector<std::string>::const_iterator messagesEnd() const;
 
+    void setCompiledBrainfuck(std::string compiled);
     std::string getCompiledBrainfuck() const;
 private:
     std::string program;
