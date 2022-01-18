@@ -32,12 +32,10 @@ int main(int argc, char* argv[])
     cmp.compile(context);
     std::string compiled = context.getCompiledBrainfuck();
 
-    std::cout << "Program:\n===================================\n" << program << "\n\n";
+    std::cout << std::endl;
     std::cout << "Compiler Messages:\n===================================\n";
     for (auto it = context.messagesBegin(); it != context.messagesEnd(); it++)
         std::cout << *it << std::endl;
-    std::cout << std::endl;
-    std::cout << "Compiled Brainfuck:\n===================================\n" << compiled << "\n\n";
 
     std::ofstream ofs(argv[2]);
     ofs << compiled;

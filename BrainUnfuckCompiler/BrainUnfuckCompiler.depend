@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1642369529 source:c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\src\main.cpp
+1642465099 source:c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\src\main.cpp
 	"Compiler.h"
 	<iostream>
 	<fstream>
@@ -71,10 +71,10 @@
 	<string>
 	<iostream>
 
-1642456939 source:c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\src\compilercontext.cpp
+1642460271 source:c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\src\compilercontext.cpp
 	"CompilerContext.h"
 
-1642456107 c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\include\compilercontext.h
+1642460271 c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\include\compilercontext.h
 	"Structure.h"
 	<vector>
 	<string>
@@ -94,31 +94,31 @@
 1642286703 source:c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\src\registrystage.cpp
 	"RegistryStage.h"
 
-1642457304 c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\include\registeringstage.h
+1642460271 c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\include\registeringstage.h
 	"Stage.h"
 	<sstream>
 	<algorithm>
 	<iostream>
 
-1642456971 c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\include\substitutingstage.h
+1642460271 c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\include\substitutingstage.h
 	"Stage.h"
 	<sstream>
 	<algorithm>
 	<iostream>
 
-1642459302 source:c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\src\registeringstage.cpp
+1642460271 source:c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\src\registeringstage.cpp
 	"RegisteringStage.h"
 
-1642459846 c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\include\structure.h
+1642460271 c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\include\structure.h
 	<string>
 	<vector>
 	<utility>
 	<unordered_map>
 	<iostream>
 
-1642460000 source:c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\src\substitutingstage.cpp
+1642465046 source:c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\src\substitutingstage.cpp
 	"SubstitutingStage.h"
 
-1642459824 source:c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\src\structure.cpp
+1642460271 source:c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\src\structure.cpp
 	"Structure.h"
 
