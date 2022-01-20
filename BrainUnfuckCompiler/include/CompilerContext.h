@@ -29,7 +29,7 @@ public:
     bool registerData(std::string dataName, int dataSize);
     int registerProcedure(std::string procName, std::vector<std::string> paramNames, std::vector<std::pair<int, Command>> commands);
 
-    int getDataPos(std::string dataName, int offset) const;
+    int getDataPos(Argument argument) const;
     Procedure getProcedure(std::string procName) const;
 
     std::vector<std::string>::const_iterator messagesBegin() const;

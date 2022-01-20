@@ -21,7 +21,8 @@ void RegisteringStage::process(CompilerContext& context) const
         {
             int dataSize = -1;
             std::vector<Argument>& args = command.arguments;
-            for (auto it = args.begin(); it != args.end(); it++)
+            int argNum = 1;
+            for (auto it = args.begin(); it != args.end(); it++, argNum++)
             {
                 Argument& a = *it;
                 switch (a.type)
@@ -29,21 +30,21 @@ void RegisteringStage::process(CompilerContext& context) const
                 case Argument::Type::INVALID:
                 {
                     std::ostringstream oss;
-                    oss << "Line " << lineNum << ": Cannot register invalid value as data.";
+                    oss << "Line " << lineNum << ": Argument #" << argNum << " to be registered as data is invalid.";
                     context.log(oss.str());
                     break;
                 }
                 case Argument::Type::NUMERIC_LITERAL:
                 {
                     std::ostringstream oss;
-                    oss << "Line " << lineNum << ": Cannot register numeric value as data.";
+                    oss << "Line " << lineNum << ": Argument #" << argNum << " to be registered as data is a numeric literal instead of a name.";
                     context.log(oss.str());
                     break;
                 }
                 case Argument::Type::STRING_LITERAL:
                 {
                     std::ostringstream oss;
-                    oss << "Line " << lineNum << ": Cannot register string value as data.";
+                    oss << "Line " << lineNum << ": Argument #" << argNum << " to be registered as data is a string literal instead of a name.";
                     context.log(oss.str());
                     break;
                 }

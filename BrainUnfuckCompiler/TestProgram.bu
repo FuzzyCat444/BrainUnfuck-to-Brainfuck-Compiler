@@ -1,3 +1,16 @@
-DATA a[7]
-DATA b
-OUT 1 b
+DATA n i j msg
+
+STORE "\010" n
+STORE 5 i
+STORE 5 j
+STORE "hello " msg
+
+WHILE i
+	WHILE j
+		OUT 6 msg
+		SUB j 1 j
+	ENDWHILE
+	SUB i 1 i
+	STORE 5 j
+	OUT 1 n
+ENDWHILE

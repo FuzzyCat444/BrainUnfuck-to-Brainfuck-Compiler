@@ -12,13 +12,16 @@
 1642265817 c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\include\argument.h
 	<string>
 
-1642536699 source:c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\src\assemblingstage.cpp
+1642636974 source:c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\src\assemblingstage.cpp
 	"AssemblingStage.h"
 
-1642535887 c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\include\assemblingstage.h
+1642636364 c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\include\assemblingstage.h
 	"Stage.h"
 	"Util.h"
 	<sstream>
+	<algorithm>
+	<cmath>
+	<stack>
 
 1642272812 source:c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\src\command.cpp
 	"Command.h"
@@ -48,7 +51,7 @@
 1642271920 c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\include\substitutionstage.h
 	"Stage.h"
 
-1642369529 source:c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\src\tokenizingstage.cpp
+1642551016 source:c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\src\tokenizingstage.cpp
 	"TokenizingStage.h"
 
 1642447905 c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\include\tokenizingstage.h
@@ -73,10 +76,10 @@
 	<string>
 	<iostream>
 
-1642534124 source:c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\src\compilercontext.cpp
+1642551499 source:c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\src\compilercontext.cpp
 	"CompilerContext.h"
 
-1642534068 c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\include\compilercontext.h
+1642551463 c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\include\compilercontext.h
 	"Structure.h"
 	<vector>
 	<string>
@@ -108,20 +111,20 @@
 	<algorithm>
 	<iostream>
 
-1642460271 source:c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\src\registeringstage.cpp
+1642549937 source:c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\src\registeringstage.cpp
 	"RegisteringStage.h"
 
-1642460271 c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\include\structure.h
+1642543505 c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\include\structure.h
 	<string>
 	<vector>
 	<utility>
 	<unordered_map>
 	<iostream>
 
-1642533716 source:c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\src\substitutingstage.cpp
+1642550519 source:c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\src\substitutingstage.cpp
 	"SubstitutingStage.h"
 
-1642460271 source:c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\src\structure.cpp
+1642543529 source:c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\src\structure.cpp
 	"Structure.h"
 
 1642535550 c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\include\util.h

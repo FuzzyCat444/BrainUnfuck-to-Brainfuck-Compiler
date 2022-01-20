@@ -23,7 +23,7 @@ struct Command
 {
     enum class Name
     {
-        DATA, PROC, ENDPROC, DO, WHILE, ENDWHILE,
+        DATA, PROC, ENDPROC, DO, DO_, WHILE, ENDWHILE,
         STORE, IN, OUT,
         ADDRESS, COPYVV, COPYMV, COPYVM, COPYMM,
         ADD, SUB, MUL, DIV,

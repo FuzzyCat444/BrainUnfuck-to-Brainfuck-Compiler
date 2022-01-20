@@ -10,6 +10,8 @@ Command::Name Command::commandNameFromStr(std::string str)
         return Command::Name::ENDPROC;
     else if (str == "DO")
         return Command::Name::DO;
+    else if (str == "DO_")
+        return Command::Name::DO_;
     else if (str == "WHILE")
         return Command::Name::WHILE;
     else if (str == "ENDWHILE")
@@ -68,6 +70,8 @@ std::string Command::commandStrFromName(Name name)
         return "ENDPROC";
     else if (name == Name::DO)
         return "DO";
+    else if (name == Name::DO_)
+        return "DO_";
     else if (name == Name::WHILE)
         return "WHILE";
     else if (name == Name::ENDWHILE)

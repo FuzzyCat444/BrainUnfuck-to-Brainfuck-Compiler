@@ -79,10 +79,10 @@ int CompilerContext::registerProcedure(std::string procName, std::vector<std::st
     return 0;
 }
 
-int CompilerContext::getDataPos(std::string dataName, int offset) const
+int CompilerContext::getDataPos(Argument argument) const
 {
-    if (dataReg.find(dataName) != dataReg.end() && offset >= 0)
-        return dataReg.at(dataName).position + offset;
+    if (dataReg.find(argument.str) != dataReg.end() && argument.num >= 0)
+        return dataReg.at(argument.str).position + argument.num;
     return -1;
 }
 

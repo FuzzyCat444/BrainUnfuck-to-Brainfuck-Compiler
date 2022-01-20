@@ -66,7 +66,7 @@ void TokenizingStage::process(CompilerContext& context) const
         if (commandName == Command::Name::INVALID)
         {
             std::ostringstream oss;
-            oss << "Line " << m + 1 << ": Invalid command name '" << tokens.at(0) << "'.";
+            oss << "Line " << m + 1 << ": Command name '" << tokens.at(0) << "' is invalid.";
             context.log(oss.str());
         }
         std::vector<Argument> commandArguments;
@@ -86,6 +86,7 @@ void TokenizingStage::process(CompilerContext& context) const
                      Command::commandNameFromStr(tokenN) == Command::Name::INVALID) // Variable
             {
                 arg.type = Argument::Type::VARIABLE;
+                arg.num = 0;
                 arg.str = tokenN;
             }
             else if (tokenN.size() >= 2 &&
@@ -93,6 +94,7 @@ void TokenizingStage::process(CompilerContext& context) const
                      std::count(tokenN.begin(), tokenN.end(), '"') == 2) // Str literal
             {
                 arg.type = Argument::Type::STRING_LITERAL;
+                arg.num = 0;
                 arg.str = resolveEscapeSequences(tokenN.substr(1, tokenN.size() - 2));
             }
             else
@@ -121,7 +123,7 @@ void TokenizingStage::process(CompilerContext& context) const
             if (arg.type == Argument::Type::INVALID)
             {
                 std::ostringstream oss;
-                oss << "Line " << m + 1 << ": Invalid argument '" << tokenN << "'.";
+                oss << "Line " << m + 1 << ": Argument '" << tokenN << "' is invalid.";
                 context.log(oss.str());
             }
         }
