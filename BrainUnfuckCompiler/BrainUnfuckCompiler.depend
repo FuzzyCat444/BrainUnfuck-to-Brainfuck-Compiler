@@ -12,7 +12,7 @@
 1642265817 c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\include\argument.h
 	<string>
 
-1642636974 source:c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\src\assemblingstage.cpp
+1642728521 source:c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\src\assemblingstage.cpp
 	"AssemblingStage.h"
 
 1642636364 c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\include\assemblingstage.h
@@ -114,7 +114,7 @@
 1642549937 source:c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\src\registeringstage.cpp
 	"RegisteringStage.h"
 
-1642543505 c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\include\structure.h
+1642709145 c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\include\structure.h
 	<string>
 	<vector>
 	<utility>
@@ -124,7 +124,7 @@
 1642550519 source:c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\src\substitutingstage.cpp
 	"SubstitutingStage.h"
 
-1642543529 source:c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\src\structure.cpp
+1642703972 source:c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\src\structure.cpp
 	"Structure.h"
 
 1642535550 c:\users\harry\onedrive\brainunfucktobrainfuckcompiler\brainunfuckcompiler\include\util.h

@@ -457,6 +457,245 @@ void AssemblingStage::process(CompilerContext& context) const
                 compiled << util::repeat(left20, pos) << left19;
             }
         }
+        else if (command.name == Command::Name::LTE ||
+                 command.name == Command::Name::LT ||
+                 command.name == Command::Name::GT ||
+                 command.name == Command::Name::GTE ||
+                 command.name == Command::Name::EQ ||
+                 command.name == Command::Name::NEQ ||
+                 command.name == Command::Name::AND ||
+                 command.name == Command::Name::OR)
+        {
+            if (command.arguments.size() != 3)
+            {
+                std::ostringstream oss;
+                oss << "Line " << lineNum << ": LTE/LT/GT/GTE/EQ/NEQ/AND/OR - Takes 3 arguments.";
+                context.log(oss.str());
+            }
+            else if (!namedNumArg(command, 0) || !byteSize(command, 0))
+            {
+                std::ostringstream oss;
+                oss << "Line " << lineNum << ": LTE/LT/GT/GTE/EQ/NEQ/AND/OR - Argument #1 must be a variable or numeric (0-255) or string literal.";
+                context.log(oss.str());
+            }
+            else if (!namedNumArg(command, 1) || !byteSize(command, 1))
+            {
+                std::ostringstream oss;
+                oss << "Line " << lineNum << ": LTE/LT/GT/GTE/EQ/NEQ/AND/OR - Argument #2 must be a variable or numeric (0-255) or string literal.";
+                context.log(oss.str());
+            }
+            else if (!namedArg(command, 2))
+            {
+                std::ostringstream oss;
+                oss << "Line " << lineNum << ": LTE/LT/GT/GTE/EQ/NEQ/AND/OR - Argument #3 must be a variable.";
+                context.log(oss.str());
+            }
+            else
+            {
+                int workingPosA = command.name == Command::Name::LTE ? 5 :
+                                  command.name == Command::Name::LT ? 4 :
+                                  command.name == Command::Name::GTE ? 4 :
+                                  command.name == Command::Name::GT ? 5 :
+                                  command.name == Command::Name::EQ ? 5 :
+                                  command.name == Command::Name::NEQ ? 5 :
+                                  command.name == Command::Name::AND ? 7 :
+                                  command.name == Command::Name::OR ? 2 : 0;
+                int workingPosB = command.name == Command::Name::LTE ? 4 :
+                                  command.name == Command::Name::LT ? 5 :
+                                  command.name == Command::Name::GTE ? 5 :
+                                  command.name == Command::Name::GT ? 4 :
+                                  command.name == Command::Name::EQ ? 4 :
+                                  command.name == Command::Name::NEQ ? 4 :
+                                  command.name == Command::Name::AND ? 6 :
+                                  command.name == Command::Name::OR ? 1 : 0;
+                int workingMem = command.name == Command::Name::LTE ? 7 :
+                                 command.name == Command::Name::LT ? 7 :
+                                 command.name == Command::Name::GTE ? 7 :
+                                 command.name == Command::Name::GT ? 7 :
+                                 command.name == Command::Name::EQ ? 6 :
+                                 command.name == Command::Name::NEQ ? 6 :
+                                 command.name == Command::Name::AND ? 8 :
+                                 command.name == Command::Name::OR ? 3 : 0;
+                int onePos = command.name == Command::Name::LTE ? 2 :
+                             command.name == Command::Name::LT ? 2 :
+                             command.name == Command::Name::GTE ? 2 :
+                             command.name == Command::Name::GT ? 2 :
+                             command.name == Command::Name::EQ ? 3 :
+                             command.name == Command::Name::NEQ ? 3 :
+                             command.name == Command::Name::AND ? 3 :
+                             command.name == Command::Name::OR ? 0 : 0;
+
+                compiled << zeroWorkingMem(workingMem);
+                if (namedArg(command, 0))
+                {
+                    int posA = context.getDataPos(argN(command, 0));
+                    if (posA == -1)
+                    {
+                        std::ostringstream oss;
+                        oss << "Line " << lineNum << ": LTE/LT/GT/GTE/EQ/NEQ/AND/OR - Argument #1 is an undefined data name.";
+                        context.log(oss.str());
+                    }
+                    else
+                        compiled << variableToPosition(posA, workingPosA);
+                }
+                else
+                    compiled << placeByteInPosition(argN(command, 0).num, workingPosA);
+                if (namedArg(command, 1))
+                {
+                    int posB = context.getDataPos(argN(command, 1));
+                    if (posB == -1)
+                    {
+                        std::ostringstream oss;
+                        oss << "Line " << lineNum << ": LTE/LT/GT/GTE/EQ/NEQ/AND/OR - Argument #2 is an undefined data name.";
+                        context.log(oss.str());
+                    }
+                    else
+                        compiled << variableToPosition(posB, workingPosB);
+                }
+                else
+                    compiled << placeByteInPosition(argN(command, 1).num, workingPosB);
+                int posC = context.getDataPos(argN(command, 2));
+                if (posC == -1)
+                {
+                    std::ostringstream oss;
+                    oss << "Line " << lineNum << ": LTE/LT/GT/GTE/EQ/NEQ/AND/OR - Argument #3 is an undefined data name.";
+                    context.log(oss.str());
+                }
+                else
+                {
+                    if (command.name != Command::Name::OR)
+                    {
+                        compiled << util::repeat("<", onePos + 1);
+                        compiled << "+";
+                        compiled << util::repeat(">", onePos + 1);
+                        if (command.name == Command::Name::EQ)
+                            compiled << "<+>";
+                    }
+                    compiled << util::repeat("<", workingPosA + 1);
+                    compiled << (command.name == Command::Name::LTE ? ">[-<-[<]>>]>[->>+<<]>[->]<<<<" :
+                                 command.name == Command::Name::LT ? "[-<-[<]>>]>[-]>[->>+<]<<<" :
+                                 command.name == Command::Name::GTE ? "[-<-[<]>>]>[->>+<<]>[->]<<<" :
+                                 command.name == Command::Name::GT ? ">[-<-[<]>>]>[-]>[->>+<]<<<<" :
+                                 command.name == Command::Name::EQ ? "[->-<]>[>>>>-<<]>[->>]<<<<" :
+                                 command.name == Command::Name::NEQ ? "[->-<]>[>>>>+<<]>[->>]<<<<" :
+                                 command.name == Command::Name::AND ? "[>]>>[->>>+<<<]>[->]>[->>]<<<<<<" :
+                                 command.name == Command::Name::OR ? "[->>+<<]>[->+<]<" : "");
+                    compiled << util::repeat(">", workingPosA + 1);
+                    compiled << positionToVariable(0, posC);
+                }
+            }
+        }
+        else if (command.name == Command::Name::NOT)
+        {
+            if (command.arguments.size() != 2)
+            {
+                std::ostringstream oss;
+                oss << "Line " << lineNum << ": NOT - Takes 2 arguments.";
+                context.log(oss.str());
+            }
+            else if (!namedNumArg(command, 0) || !byteSize(command, 0))
+            {
+                std::ostringstream oss;
+                oss << "Line " << lineNum << ": NOT - Argument #1 must be a variable or numeric (0-255) or string literal.";
+                context.log(oss.str());
+            }
+            else if (!namedArg(command, 1))
+            {
+                std::ostringstream oss;
+                oss << "Line " << lineNum << ": NOT - Argument #2 must be a variable.";
+                context.log(oss.str());
+            }
+            else
+            {
+                zeroWorkingMem(5);
+                if (namedArg(command, 0))
+                {
+                    int posA = context.getDataPos(argN(command, 0));
+                    if (posA == -1)
+                    {
+                        std::ostringstream oss;
+                        oss << "Line " << lineNum << ": NOT - Argument #1 is an undefined data name.";
+                        context.log(oss.str());
+                    }
+                    else
+                        compiled << variableToPosition(posA, 4);
+                }
+                else
+                    compiled << placeByteInPosition(argN(command, 0).num, 4);
+                int posB = context.getDataPos(argN(command, 1));
+                if (posB == -1)
+                {
+                    std::ostringstream oss;
+                    oss << "Line " << lineNum << ": NOT - Argument #2 is an undefined data name.";
+                    context.log(oss.str());
+                }
+                else
+                {
+                    compiled << "<<<+>>>";
+                    compiled << "<<<<<";
+                    compiled << "[>]>[-]>[->>+<]<<<";
+                    compiled << ">>>>>";
+                    compiled << positionToVariable(0, posB);
+                }
+            }
+        }
+        else if (command.name == Command::Name::COPYVV)
+        {
+            if (command.arguments.size() != 2)
+            {
+                std::ostringstream oss;
+                oss << "Line " << lineNum << ": COPYVV - Takes 2 arguments.";
+                context.log(oss.str());
+            }
+            else if (!namedArg(command, 0))
+            {
+                std::ostringstream oss;
+                oss << "Line " << lineNum << ": COPYVV - Argument #1 must be a variable.";
+                context.log(oss.str());
+            }
+            else if (!namedArg(command, 1))
+            {
+                std::ostringstream oss;
+                oss << "Line " << lineNum << ": COPYVV - Argument #2 must be a variable.";
+                context.log(oss.str());
+            }
+            else
+            {
+                int posA = context.getDataPos(argN(command, 0));
+                int posB = context.getDataPos(argN(command, 1));
+                if (posA == -1)
+                {
+                    std::ostringstream oss;
+                    oss << "Line " << lineNum << ": COPYVV - Argument #1 is an undefined data name.";
+                    context.log(oss.str());
+                }
+                else if (posB == -1)
+                {
+                    std::ostringstream oss;
+                    oss << "Line " << lineNum << ": COPYVV - Argument #2 is an undefined data name.";
+                    context.log(oss.str());
+                }
+                else
+                {
+                    if (posB < posA)
+                    {
+                        compiled << right19 << util::repeat(right20, posB) << "[-]";
+                        compiled << util::repeat(right20, posA - posB);
+                        compiled << "[-<+" << util::repeat(left20, posA - posB).substr(1) << "+";
+                        compiled << util::repeat(right20, posA - posB) << "]";
+                        compiled << "<[->+<]>" << util::repeat(left20, posA) << left19;
+                    }
+                    else if (posA < posB)
+                    {
+                        compiled << right19 << util::repeat(right20, posB) << "[-]";
+                        compiled << util::repeat(left20, posB - posA);
+                        compiled << "[-<+>" << util::repeat(right20, posB - posA) << "+";
+                        compiled << util::repeat(left20, posB - posA) << "]";
+                        compiled << "<[->+<]>" << util::repeat(left20, posA) << left19;
+                    }
+                }
+            }
+        }
     }
 
     std::string compiledStr = compiled.str();

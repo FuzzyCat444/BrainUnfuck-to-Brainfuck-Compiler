@@ -27,7 +27,7 @@ struct Command
         STORE, IN, OUT,
         ADDRESS, COPYVV, COPYMV, COPYVM, COPYMM,
         ADD, SUB, MUL, DIV,
-        LT, GT, EQ, LTE, GTE, NOT, OR, AND,
+        LT, GT, EQ, NEQ, LTE, GTE, NOT, OR, AND,
         INVALID
     };
 

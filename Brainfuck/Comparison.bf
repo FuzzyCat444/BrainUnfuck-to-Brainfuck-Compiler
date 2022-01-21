@@ -27,12 +27,12 @@ start and end on a
 ]
 >[ a lt b
 	->
-	>>+<<
+	>+<
 ]
 <<<
 
 Minified:
-[-<-[<]>>]>[-]>[->>>+<<]<<<
+[-<-[<]>>]>[-]>[->>+<]<<<
 
 GTE:
 0 b a 0 1 0 f
@@ -63,9 +63,25 @@ start and end on a
 ]
 >[ b lt a
 	-> 
-	>>+<<
+	>+<
 ]
 <<<<
 
 Minified:
->[-<-[<]>>]>[-]>[->>>+<<]<<<<
+>[-<-[<]>>]>[-]>[->>+<]<<<<
+
+EQ:
+a b 1 0 0 f
+start with flag at 1
+sets flag to 1 if a equal to b else 0
+start and end on a
+
+[->-<]>[>>>>-<<]>[->>]<<<<
+
+NEQ:
+a b 1 0 0 f
+start with flag at 0
+sets flag to 1 if a not equal to b else 0
+start and end on a
+
+[->-<]>[>>>>+<<]>[->>]<<<<

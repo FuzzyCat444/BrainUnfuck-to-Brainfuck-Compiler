@@ -46,6 +46,8 @@ Command::Name Command::commandNameFromStr(std::string str)
         return Command::Name::GT;
     else if (str == "EQ")
         return Command::Name::EQ;
+    else if (str == "NEQ")
+        return Command::Name::NEQ;
     else if (str == "LTE")
         return Command::Name::LTE;
     else if (str == "GTE")
@@ -106,6 +108,8 @@ std::string Command::commandStrFromName(Name name)
         return "GT";
     else if (name == Name::EQ)
         return "EQ";
+    else if (name == Name::NEQ)
+        return "NEQ";
     else if (name == Name::LTE)
         return "LTE";
     else if (name == Name::GTE)
