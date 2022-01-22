@@ -10,7 +10,7 @@ TokenizingStage::~TokenizingStage()
 
 void TokenizingStage::process(CompilerContext& context) const
 {
-    // Convert lines to vector of strings, stripping whitespace
+    // Convert lines to vector of strings, stripping whitespace and comments starting with ;
     std::vector<std::string> lines;
     std::istringstream inputSS(context.getProgram());
     std::string ssLine;
@@ -22,6 +22,9 @@ void TokenizingStage::process(CompilerContext& context) const
         };
         ssLine.erase(ssLine.begin(), std::find_if(ssLine.begin(), ssLine.end(), notSpace));
         ssLine.erase(std::find_if(ssLine.rbegin(), ssLine.rend(), notSpace).base(), ssLine.end());
+        int semicolon = ssLine.find(";");
+        if (semicolon != -1)
+            ssLine = ssLine.substr(0, semicolon);
         lines.push_back(ssLine);
     }
 

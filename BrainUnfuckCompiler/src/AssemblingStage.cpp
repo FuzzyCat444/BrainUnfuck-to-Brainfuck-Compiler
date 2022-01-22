@@ -179,13 +179,13 @@ void AssemblingStage::process(CompilerContext& context) const
             else if (!namedNumArg(command, 0) || !byteSize(command, 0))
             {
                 std::ostringstream oss;
-                oss << "Line " << lineNum << ": ADD/SUB - Argument #1 must be a variable or numeric (0-255) or string literal.";
+                oss << "Line " << lineNum << ": ADD/SUB - Argument #1 must be a variable or numeric (0-255) literal.";
                 context.log(oss.str());
             }
             else if (!namedNumArg(command, 1) || !byteSize(command, 1))
             {
                 std::ostringstream oss;
-                oss << "Line " << lineNum << ": ADD/SUB - Argument #2 must be a variable or numeric (0-255) or string literal.";
+                oss << "Line " << lineNum << ": ADD/SUB - Argument #2 must be a variable or numeric (0-255) literal.";
                 context.log(oss.str());
             }
             else if (!namedArg(command, 2))
@@ -252,13 +252,13 @@ void AssemblingStage::process(CompilerContext& context) const
             else if (!namedNumArg(command, 0) || !byteSize(command, 0))
             {
                 std::ostringstream oss;
-                oss << "Line " << lineNum << ": MUL - Argument #1 must be a variable or numeric (0-255) or string literal.";
+                oss << "Line " << lineNum << ": MUL - Argument #1 must be a variable or numeric (0-255) literal.";
                 context.log(oss.str());
             }
             else if (!namedNumArg(command, 1) || !byteSize(command, 1))
             {
                 std::ostringstream oss;
-                oss << "Line " << lineNum << ": MUL - Argument #2 must be a variable or numeric (0-255) or string literal.";
+                oss << "Line " << lineNum << ": MUL - Argument #2 must be a variable or numeric (0-255) literal.";
                 context.log(oss.str());
             }
             else if (!namedArg(command, 2))
@@ -325,13 +325,13 @@ void AssemblingStage::process(CompilerContext& context) const
             else if (!namedNumArg(command, 0) || !byteSize(command, 0))
             {
                 std::ostringstream oss;
-                oss << "Line " << lineNum << ": DIV - Argument #1 must be a variable or numeric (0-255) or string literal.";
+                oss << "Line " << lineNum << ": DIV - Argument #1 must be a variable or numeric (0-255) literal.";
                 context.log(oss.str());
             }
             else if (!namedNumArg(command, 1) || !byteSize(command, 1))
             {
                 std::ostringstream oss;
-                oss << "Line " << lineNum << ": DIV - Argument #2 must be a variable or numeric (0-255) or string literal.";
+                oss << "Line " << lineNum << ": DIV - Argument #2 must be a variable or numeric (0-255) literal.";
                 context.log(oss.str());
             }
             else if (!namedArg(command, 2))
@@ -475,13 +475,13 @@ void AssemblingStage::process(CompilerContext& context) const
             else if (!namedNumArg(command, 0) || !byteSize(command, 0))
             {
                 std::ostringstream oss;
-                oss << "Line " << lineNum << ": LTE/LT/GT/GTE/EQ/NEQ/AND/OR - Argument #1 must be a variable or numeric (0-255) or string literal.";
+                oss << "Line " << lineNum << ": LTE/LT/GT/GTE/EQ/NEQ/AND/OR - Argument #1 must be a variable or numeric (0-255) literal.";
                 context.log(oss.str());
             }
             else if (!namedNumArg(command, 1) || !byteSize(command, 1))
             {
                 std::ostringstream oss;
-                oss << "Line " << lineNum << ": LTE/LT/GT/GTE/EQ/NEQ/AND/OR - Argument #2 must be a variable or numeric (0-255) or string literal.";
+                oss << "Line " << lineNum << ": LTE/LT/GT/GTE/EQ/NEQ/AND/OR - Argument #2 must be a variable or numeric (0-255) literal.";
                 context.log(oss.str());
             }
             else if (!namedArg(command, 2))
@@ -596,7 +596,7 @@ void AssemblingStage::process(CompilerContext& context) const
             else if (!namedNumArg(command, 0) || !byteSize(command, 0))
             {
                 std::ostringstream oss;
-                oss << "Line " << lineNum << ": NOT - Argument #1 must be a variable or numeric (0-255) or string literal.";
+                oss << "Line " << lineNum << ": NOT - Argument #1 must be a variable or numeric (0-255) literal.";
                 context.log(oss.str());
             }
             else if (!namedArg(command, 1))
@@ -696,6 +696,267 @@ void AssemblingStage::process(CompilerContext& context) const
                 }
             }
         }
+        else if (command.name == Command::Name::COPYVM)
+        {
+            if (command.arguments.size() != 5)
+            {
+                std::ostringstream oss;
+                oss << "Line " << lineNum << ": COPYVM - Takes 5 arguments.";
+                context.log(oss.str());
+            }
+            else if (!namedNumArg(command, 1) || !byteSize(command, 1) ||
+                     !namedNumArg(command, 2) || !byteSize(command, 2) ||
+                     !namedNumArg(command, 3) || !byteSize(command, 3) ||
+                     !namedNumArg(command, 4) || !byteSize(command, 4))
+            {
+                std::ostringstream oss;
+                oss << "Line " << lineNum << ": COPYVM - Argument #2-5 must be a variable or numeric (0-255) literal.";
+                context.log(oss.str());
+            }
+            else if (!namedArg(command, 0))
+            {
+                std::ostringstream oss;
+                oss << "Line " << lineNum << ": COPYVM - Argument #1 must be a variable.";
+                context.log(oss.str());
+            }
+            else
+            {
+                int posA = context.getDataPos(argN(command, 0));
+                if (posA == -1)
+                {
+                    std::ostringstream oss;
+                    oss << "Line " << lineNum << ": COPYVM - Argument #1 is an undefined data name.";
+                    context.log(oss.str());
+                }
+                else
+                {
+                    compiled << util::repeat(">", 14) << "+>+<" << util::repeat("<", 14);
+                    compiled << variableToPosition(posA, -18);
+                    if (namedArg(command, 1))
+                    {
+                        int posI = context.getDataPos(argN(command, 1));
+                        if (posI == -1)
+                        {
+                            std::ostringstream oss;
+                            oss << "Line " << lineNum << ": COPYVM - Argument #2 is an undefined data name.";
+                            context.log(oss.str());
+                        }
+                        else
+                            compiled << variableToPosition(posI, -1);
+                    }
+                    else
+                        compiled << placeByteInPosition(argN(command, 1).num, -1);
+                    if (namedArg(command, 2))
+                    {
+                        int posJ = context.getDataPos(argN(command, 2));
+                        if (posJ == -1)
+                        {
+                            std::ostringstream oss;
+                            oss << "Line " << lineNum << ": COPYVM - Argument #3 is an undefined data name.";
+                            context.log(oss.str());
+                        }
+                        else
+                            compiled << variableToPosition(posJ, -4);
+                    }
+                    else
+                        compiled << placeByteInPosition(argN(command, 2).num, -4);
+                    if (namedArg(command, 3))
+                    {
+                        int posK = context.getDataPos(argN(command, 3));
+                        if (posK == -1)
+                        {
+                            std::ostringstream oss;
+                            oss << "Line " << lineNum << ": COPYVM - Argument #4 is an undefined data name.";
+                            context.log(oss.str());
+                        }
+                        else
+                            compiled << variableToPosition(posK, -7);
+                    }
+                    else
+                        compiled << placeByteInPosition(argN(command, 3).num, -7);
+                    if (namedArg(command, 4))
+                    {
+                        int posL = context.getDataPos(argN(command, 4));
+                        if (posL == -1)
+                        {
+                            std::ostringstream oss;
+                            oss << "Line " << lineNum << ": COPYVM - Argument #5 is an undefined data name.";
+                            context.log(oss.str());
+                        }
+                        else
+                            compiled << variableToPosition(posL, -10);
+                    }
+                    else
+                        compiled << placeByteInPosition(argN(command, 4).num, -10);
+
+                    compiled << ">>>>>>>>>>>>>>[<<<<<<<<<<<<<<>>+>>>+>>>+>>>+<<<<<<<<<<<[>]>[>>>>>>>>>>+<<<<" <<
+                                "<<<<<<<]>[-]>[>]>[>>>>>>>+<<<<<<<<]>[-]>[>]>[>>>>+<<<<<]>[-]>[>]>[>+<<]>>[-" <<
+                                "<[-]>]<[->>>-<<<]>>>[<<<<<<<<<<<<<<[->>>>>>>>>>>>>>>>>>>>+<<<<<<<<<<<<<<<<<" <<
+                                "<<<]>>>[->>>>>>>>>>>>>>>>>>>>+<<<<<<<<<<<<<<<<<<<<]>>>[->>>>>>>>>>>>>>>>>>>" <<
+                                ">+<<<<<<<<<<<<<<<<<<<<]>>>[->>>>>>>>>>>>>>>>>>>>+<<<<<<<<<<<<<<<<<<<<]>>>>>" <<
+                                "->>>[->>>>>>>>>>>>>>>>>>>>+<<<<<<<<<<<<<<<<<<<<]>>>>>>>>>>>>>>+<<[>]>>[->>+" <<
+                                "<]<<<->>[-]>>[-<<+<<<<<[>]>>>>>[->>+<]<[-]<<<<<->>>>>>>[-<<+<<<<<<<<[>]>>>>" <<
+                                ">>>>[->>+<]<[-]<<<<<<<<->>>>>>>>>>[-<<<<<<<<<<<<<->>>>>>>>>>>>>]]]<<<<<<<<<" <<
+                                "<<<<>>>>>>>>>>>>>>>+>+<<]>[-<+>]<]>>>>>[-]<<[->>+<<]<[-<<<<<<<<<<<<<<<<<<<<" <<
+                                "]<<<<<<<<<<<<<<<<";
+                }
+            }
+        }
+        else if (command.name == Command::Name::COPYMV)
+        {
+            if (command.arguments.size() != 5)
+            {
+                std::ostringstream oss;
+                oss << "Line " << lineNum << ": COPYMV - Takes 5 arguments.";
+                context.log(oss.str());
+            }
+            else if (!namedNumArg(command, 0) || !byteSize(command, 0) ||
+                     !namedNumArg(command, 1) || !byteSize(command, 1) ||
+                     !namedNumArg(command, 2) || !byteSize(command, 2) ||
+                     !namedNumArg(command, 3) || !byteSize(command, 3))
+            {
+                std::ostringstream oss;
+                oss << "Line " << lineNum << ": COPYMV - Argument #1-4 must be a variable or numeric (0-255) literal.";
+                context.log(oss.str());
+            }
+            else if (!namedArg(command, 4))
+            {
+                std::ostringstream oss;
+                oss << "Line " << lineNum << ": COPYMV - Argument #5 must be a variable.";
+                context.log(oss.str());
+            }
+            else
+            {
+                int posE = context.getDataPos(argN(command, 4));
+                if (posE == -1)
+                {
+                    std::ostringstream oss;
+                    oss << "Line " << lineNum << ": COPYMV - Argument #5 is an undefined data name.";
+                    context.log(oss.str());
+                }
+                else
+                {
+                    compiled << util::repeat(">", 14) << "+>+<" << util::repeat("<", 14);
+                    if (namedArg(command, 0))
+                    {
+                        int posI = context.getDataPos(argN(command, 0));
+                        if (posI == -1)
+                        {
+                            std::ostringstream oss;
+                            oss << "Line " << lineNum << ": COPYMV - Argument #1 is an undefined data name.";
+                            context.log(oss.str());
+                        }
+                        else
+                            compiled << variableToPosition(posI, -1);
+                    }
+                    else
+                        compiled << placeByteInPosition(argN(command, 0).num, -1);
+                    if (namedArg(command, 1))
+                    {
+                        int posJ = context.getDataPos(argN(command, 1));
+                        if (posJ == -1)
+                        {
+                            std::ostringstream oss;
+                            oss << "Line " << lineNum << ": COPYMV - Argument #2 is an undefined data name.";
+                            context.log(oss.str());
+                        }
+                        else
+                            compiled << variableToPosition(posJ, -4);
+                    }
+                    else
+                        compiled << placeByteInPosition(argN(command, 1).num, -4);
+                    if (namedArg(command, 2))
+                    {
+                        int posK = context.getDataPos(argN(command, 2));
+                        if (posK == -1)
+                        {
+                            std::ostringstream oss;
+                            oss << "Line " << lineNum << ": COPYMV - Argument #3 is an undefined data name.";
+                            context.log(oss.str());
+                        }
+                        else
+                            compiled << variableToPosition(posK, -7);
+                    }
+                    else
+                        compiled << placeByteInPosition(argN(command, 2).num, -7);
+                    if (namedArg(command, 3))
+                    {
+                        int posL = context.getDataPos(argN(command, 3));
+                        if (posL == -1)
+                        {
+                            std::ostringstream oss;
+                            oss << "Line " << lineNum << ": COPYMV - Argument #4 is an undefined data name.";
+                            context.log(oss.str());
+                        }
+                        else
+                            compiled << variableToPosition(posL, -10);
+                    }
+                    else
+                        compiled << placeByteInPosition(argN(command, 3).num, -10);
+
+                    compiled << ">>>>>>>>>>>>>>[<<<<<<<<<<<<<<>>+>>>+>>>+>>>+<<<<<<<<<<<[>]>[>>>>>>>>>>+<<<<<<" <<
+                                "<<<<<]>[-]>[>]>[>>>>>>>+<<<<<<<<]>[-]>[>]>[>>>>+<<<<<]>[-]>[>]>[>+<<]>>[-<[-]" <<
+                                ">]<[->>>-<<<]>>>[<<<<<<<<<<<<<<[->>>>>>>>>>>>>>>>>>>>+<<<<<<<<<<<<<<<<<<<<]>>" <<
+                                ">[->>>>>>>>>>>>>>>>>>>>+<<<<<<<<<<<<<<<<<<<<]>>>[->>>>>>>>>>>>>>>>>>>>+<<<<<<" <<
+                                "<<<<<<<<<<<<<<]>>>[->>>>>>>>>>>>>>>>>>>>+<<<<<<<<<<<<<<<<<<<<]>>>>>->>>[->>>>" <<
+                                ">>>>>>>>>>>>>>>>+<<<<<<<<<<<<<<<<<<<<]>>>>>>>>>>>>>>+<<[>]>>[->>+<]<<<->>[-]>" <<
+                                ">[-<<+<<<<<[>]>>>>>[->>+<]<[-]<<<<<->>>>>>>[-<<+<<<<<<<<[>]>>>>>>>>[->>+<]<[-" <<
+                                "]<<<<<<<<->>>>>>>>>>[-<<<<<<<<<<<<<->>>>>>>>>>>>>]]]<<<<<<<<<<<<<>>>>>>>>>>>>" <<
+                                ">>>+>+<<]>[-<+>]<]>>>>>[-<+<+>>]<[->+<]<<[->[-<<<<<<<<<<<<<<<<<<<<+>>>>>>>>>>" <<
+                                ">>>>>>>>>>]<<<<<<<<<<<<<<<<<<<<<]<<<<<<<<<<<<<<<<";
+                    compiled << positionToVariable(-18, posE);
+                }
+            }
+        }
+        else if (command.name == Command::Name::ADDRESS)
+        {
+            if (command.arguments.size() != 5)
+            {
+                std::ostringstream oss;
+                oss << "Line " << lineNum << ": ADDRESS - Takes 5 arguments.";
+                context.log(oss.str());
+            }
+            else if (!namedArg(command, 0) ||
+                     !namedArg(command, 1) ||
+                     !namedArg(command, 2) ||
+                     !namedArg(command, 3) ||
+                     !namedArg(command, 4))
+            {
+                std::ostringstream oss;
+                oss << "Line " << lineNum << ": ADDRESS - Argument #1-5 must be a variable.";
+                context.log(oss.str());
+            }
+            else
+            {
+                int posA = context.getDataPos(argN(command, 0));
+                int posI = context.getDataPos(argN(command, 1));
+                int posJ = context.getDataPos(argN(command, 2));
+                int posK = context.getDataPos(argN(command, 3));
+                int posL = context.getDataPos(argN(command, 4));
+                if (posA == -1 || posI == -1 || posJ == -1 || posK == -1 || posL == -1)
+                {
+                    std::ostringstream oss;
+                    oss << "Line " << lineNum << ": ADDRESS - One or more arguments are an undefined data name.";
+                    context.log(oss.str());
+                }
+                else
+                {
+                    int byteL = posA & 0xff;
+                    int byteK = (posA >> 8) & 0xff;
+                    int byteJ = (posA >> 16) & 0xff;
+                    int byteI = (posA >> 24) & 0xff;
+                    compiled << zeroWorkingMem(4);
+                    compiled << placeByteInPosition(byteL, 0);
+                    compiled << placeByteInPosition(byteK, 1);
+                    compiled << placeByteInPosition(byteJ, 2);
+                    compiled << placeByteInPosition(byteI, 3);
+                    compiled << positionToVariable(0, posL);
+                    compiled << positionToVariable(1, posK);
+                    compiled << positionToVariable(2, posJ);
+                    compiled << positionToVariable(3, posI);
+                }
+            }
+        }
     }
 
     std::string compiledStr = compiled.str();
@@ -713,10 +974,14 @@ std::string AssemblingStage::variableToPosition(int variable, int position) cons
     std::string left20 = left19 + "<";
     std::string right20X = util::repeat(right20, variable);
     std::string left20X = util::repeat(left20, variable);
+    std::string adjust1 = util::repeat("<", abs(position + 1));
+    std::string adjust2 = util::repeat(">", abs(position + 1));
+    if (position < 0)
+        std::swap(adjust1, adjust2);
 
     std::string pass1 = right19 + right20X;
-    std::string pass2 = "[-<+" + (left20X + left19).substr(1) + util::repeat("<", position + 1) + "+";
-    std::string pass3 = util::repeat(">", position + 1) + right19 + right20X + "]";
+    std::string pass2 = "[-<+" + (left20X + left19).substr(1) + adjust1 + "+";
+    std::string pass3 = adjust2 + right19 + right20X + "]";
     std::string pass4 = "<[->+<]>" + left20X + left19;
 
     return pass1 + pass2 + pass3 + pass4;
@@ -730,11 +995,15 @@ std::string AssemblingStage::positionToVariable(int position, int variable) cons
     std::string left20 = left19 + "<";
     std::string right20X = util::repeat(right20, variable);
     std::string left20X = util::repeat(left20, variable);
+    std::string adjust1 = util::repeat("<", abs(position + 1));
+    std::string adjust2 = util::repeat(">", abs(position + 1));
+    if (position < 0)
+        std::swap(adjust1, adjust2);
 
     std::string pass1 = right19 + right20X + "[-]";
-    std::string pass2 = left20X + left19 + util::repeat("<", position + 1);
-    std::string pass3 = "[-" + util::repeat(">", position + 1) + right19 + right20X + "+";
-    std::string pass4 = left20X + left19 + util::repeat("<", position + 1) + "]" + util::repeat(">", position + 1);
+    std::string pass2 = left20X + left19 + adjust1;
+    std::string pass3 = "[-" + adjust2 + right19 + right20X + "+";
+    std::string pass4 = left20X + left19 + adjust1 + "]" + adjust2;
 
     return pass1 + pass2 + pass3 + pass4;
 }
@@ -742,7 +1011,11 @@ std::string AssemblingStage::positionToVariable(int position, int variable) cons
 // Places a byte into working memory
 std::string AssemblingStage::placeByteInPosition(int byte, int position) const
 {
-    return util::repeat("<", position + 1) + util::repeat("+", byte) + util::repeat(">", position + 1);
+    std::string adjust1 = util::repeat("<", abs(position + 1));
+    std::string adjust2 = util::repeat(">", abs(position + 1));
+    if (position < 0)
+        std::swap(adjust1, adjust2);
+    return adjust1 + util::repeat("+", byte) + adjust2;
 }
 
 // Finds all pairs of "<" and ">" and combines them into nothing

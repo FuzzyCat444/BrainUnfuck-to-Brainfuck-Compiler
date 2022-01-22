@@ -30,8 +30,6 @@ Command::Name Command::commandNameFromStr(std::string str)
         return Command::Name::COPYMV;
     else if (str == "COPYVM")
         return Command::Name::COPYVM;
-    else if (str == "COPYMM")
-        return Command::Name::COPYMM;
     else if (str == "ADD")
         return Command::Name::ADD;
     else if (str == "SUB")
@@ -92,8 +90,6 @@ std::string Command::commandStrFromName(Name name)
         return "COPYMV";
     else if (name == Name::COPYVM)
         return "COPYVM";
-    else if (name == Name::COPYMM)
-        return "COPYMM";
     else if (name == Name::ADD)
         return "ADD";
     else if (name == Name::SUB)
@@ -122,28 +118,4 @@ std::string Command::commandStrFromName(Name name)
         return "AND";
 
     return "INVALID";
-}
-
-void printCommands(const std::vector<std::pair<int, Command>>& commands)
-{
-    for (auto it = commands.begin(); it != commands.end(); it++)
-    {
-        const Command& command = it->second;
-        std::cout << Command::commandStrFromName(command.name) << " ";
-        for (auto argIt = command.arguments.begin(); argIt != command.arguments.end(); argIt++)
-        {
-            if (argIt->type == Argument::Type::INVALID)
-                std::cout << "INVALID";
-            else if (argIt->type == Argument::Type::NUMERIC_LITERAL)
-                std::cout << argIt->num;
-            else if (argIt->type == Argument::Type::STRING_LITERAL)
-                std::cout << '"' << argIt->str << '"';
-            else if (argIt->type == Argument::Type::VARIABLE)
-                std::cout << argIt->str;
-            else if (argIt->type == Argument::Type::VARIABLE_ARRAY)
-                std::cout << argIt->str << "[" << argIt->num << "]";
-            std::cout << " ";
-        }
-        std::cout << std::endl;
-    }
 }

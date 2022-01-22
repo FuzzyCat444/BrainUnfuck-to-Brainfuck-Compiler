@@ -25,7 +25,7 @@ struct Command
     {
         DATA, PROC, ENDPROC, DO, DO_, WHILE, ENDWHILE,
         STORE, IN, OUT,
-        ADDRESS, COPYVV, COPYMV, COPYVM, COPYMM,
+        ADDRESS, COPYVV, COPYMV, COPYVM,
         ADD, SUB, MUL, DIV,
         LT, GT, EQ, NEQ, LTE, GTE, NOT, OR, AND,
         INVALID
@@ -37,8 +37,6 @@ struct Command
     Name name;
     std::vector<Argument> arguments;
 };
-
-void printCommands(const std::vector<std::pair<int, Command>>& commands);
 
 struct Data
 {

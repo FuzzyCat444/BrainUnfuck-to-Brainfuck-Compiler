@@ -1,0 +1,62 @@
+
+PROC PrintByte number hundreds tens bool bool2
+	STORE 0 hundreds
+	STORE 0 tens
+	STORE 0 bool
+	STORE 0 bool2
+	
+	GTE number 100 bool
+	WHILE bool
+		ADD hundreds 1 hundreds
+		SUB number 100 number
+		GTE number 100 bool
+	ENDWHILE
+	
+	GTE number 10 bool
+	WHILE bool
+		ADD tens 1 tens
+		SUB number 10 number
+		GTE number 10 bool
+	ENDWHILE
+	
+	NEQ 0 hundreds bool
+	WHILE bool
+		ADD hundreds 48 hundreds
+		OUT 1 hundreds
+		STORE 1 bool2
+		STORE 0 bool
+	ENDWHILE
+	
+	NEQ 0 tens bool
+	OR bool bool2 bool
+	WHILE bool
+		ADD tens 48 tens
+		OUT 1 tens
+		STORE 1 bool2
+		STORE 0 bool
+	ENDWHILE
+	
+	ADD number 48 number
+	OUT 1 number
+ENDPROC
+
+DATA printArgs[5]
+DATA a b c counter loop
+
+STORE 0 a
+STORE 1 b
+STORE 1 counter
+LTE counter 12 loop
+WHILE loop
+	ADD a b c
+	COPYVV b a
+	COPYVV c b
+	COPYVV c printArgs[0]
+	
+	DO_ PrintByte printArgs
+	STORE " " c
+	OUT 1 c
+	
+	ADD counter 1 counter
+	LTE counter 12 loop
+ENDWHILE

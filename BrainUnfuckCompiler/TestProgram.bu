@@ -1,9 +1,0 @@
-DATA c a d f b g
-
-STORE 34 a
-STORE 123 b
-
-COPYVV a b
-
-OUT 1 a
-OUT 1 b

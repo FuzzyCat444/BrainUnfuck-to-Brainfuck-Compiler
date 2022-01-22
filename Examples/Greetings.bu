@@ -1,0 +1,17 @@
+
+DATA name[20] question[11] message[7] hasInput numChars char
+
+STORE "What's your name?\010" question
+OUT 18 question
+STORE "Hello, " message
+
+STORE 1 hasInput
+WHILE hasInput
+	IN 1 char
+	COPYVM char 0 0 0 numChars
+	ADD numChars 1 numChars
+	NEQ char 46 hasInput
+ENDWHILE
+
+OUT 7 message
+OUT 20 name
