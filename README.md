@@ -171,7 +171,7 @@ STORE 10 a
 STORE 10 b
 EQ a b flag      ; Stores 1 in flag
 
-LTE 0 3 flag     ; Runtme error! 0 cannot appear as the first argument of LTE
+LTE 0 3 flag     ; Runtime error! 0 cannot appear as the first argument of LTE
 ```
 
 ## NOT / OR / AND Commands
@@ -188,7 +188,7 @@ NOT 7 flag         ; flag = 0 false
 OR 0 0 flag        ; flag = 0 false
 OR 1 0 flag        ; flag = 1 true
 OR 0 1 flag        ; flag = 1 true
-OR 1 1 flag        ; flag = 2 true
+OR 1 1 flag        ; flag = 1 true
 
 AND 0 0 flag       ; flag = 0 false
 AND 1 0 flag       ; flag = 0 false
