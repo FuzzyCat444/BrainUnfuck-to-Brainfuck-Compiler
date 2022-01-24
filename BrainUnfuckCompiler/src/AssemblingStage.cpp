@@ -579,7 +579,7 @@ void AssemblingStage::process(CompilerContext& context) const
                                  command.name == Command::Name::EQ ? "[->-<]>[>>>>-<<]>[->>]<<<<" :
                                  command.name == Command::Name::NEQ ? "[->-<]>[>>>>+<<]>[->>]<<<<" :
                                  command.name == Command::Name::AND ? "[>]>>[->>>+<<<]>[->]>[->>]<<<<<<" :
-                                 command.name == Command::Name::OR ? "[->>[-]+<<]>[->[-]+<]<" : "");
+                                 command.name == Command::Name::OR ? "[[-]>>[-]+<<]>[[-]>[-]+<]<" : "");
                     compiled << util::repeat(">", workingPosA + 1);
                     compiled << positionToVariable(0, posC);
                 }
