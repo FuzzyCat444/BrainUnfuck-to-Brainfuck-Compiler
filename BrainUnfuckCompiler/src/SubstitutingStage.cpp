@@ -120,6 +120,12 @@ void SubstitutingStage::process(CompilerContext& context) const
                                 commandArg = passedArg;
                             else if (commandArg.type == Argument::Type::VARIABLE_ARRAY)
                             {
+                                if (passedArg.type != Argument::Type::VARIABLE && passedArg.type != Argument::Type::VARIABLE_ARRAY)
+                                {
+                                    std::ostringstream oss;
+                                    oss << "Line " << commandsIt->first << ": DO - Procedure '" << proc.name << "' accesses non-variable argument with subscript.";
+                                    context.log(oss.str());
+                                }
                                 commandArg.str = passedArg.str;
                                 commandArg.num += passedArg.num;
                             }
