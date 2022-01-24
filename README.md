@@ -275,7 +275,7 @@ ENDPROC
 DATA x y
 STORE 3 x
 
-DO Cube x y    ; Stores 27 in x
+DO Cube x y    ; Stores 27 in y
 
 PROC Add4 number1 number2 number3 number4 result
     ADD number1 number2 result
@@ -328,3 +328,5 @@ WHILE bool
     LTE i 10 bool 
 ENDWHILE
 ```
+
+**Note:** BrainUnfuck does not provide syntax for if statements. `WHILE` may be used to simulate if statements as long as the condition variable is set to 0 afer the first iteration of the loop.
